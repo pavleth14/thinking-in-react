@@ -1,6 +1,24 @@
+import { useDispatch, useSelector } from "react-redux";
+import { setTotalPrice, resetPrice } from "../features/totalPriceSlice";
+
+
 const RowsAndProducts = ({ products }) => {
 
-    let prevRow = null;
+    const dispatch = useDispatch();
+
+    const totalPrice = useSelector((state) => state.totalPrice.totalPrice);
+
+    let prevRow = null;    
+
+    const handleTotalPrice = (itemPrice) => {
+        let num = parseInt(itemPrice.replace('$', ''));        
+        // setTotalPrice(prev => prev + num);
+        dispatch(setTotalPrice(num));
+    }
+
+    const handleResetPrice = () => {
+        dispatch(resetPrice());
+    }
 
     return (
         <div>
@@ -12,7 +30,8 @@ const RowsAndProducts = ({ products }) => {
                             <h1>{prevRow}</h1>
                             <div className="flexDiv">
                                 <p>{item.name}</p>
-                                <p>{item.price} $</p>
+                                <p>{item.price}</p>
+                                <button onClick={() => handleTotalPrice(item.price)}>Add item</button>
                             </div>
                         </div>
                     )
@@ -21,9 +40,14 @@ const RowsAndProducts = ({ products }) => {
                     <div className="flexDiv" key={index}>
                         <p>{item.name}</p>
                         <p>{item.price} $</p>
+                        <button onClick={() => handleTotalPrice(item.price)}>Add item</button>
                     </div>
                 )
             })}
+            Total Price: {totalPrice}
+            <div>
+                <button onClick={handleResetPrice}>resetPrice</button>
+            </div>
         </div>
     );
 }
