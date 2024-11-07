@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -47,4 +52,25 @@
   border: 1px solid;
   padding: 10px;
   margin-bottom: 1px;
+}
+
+.headerDiv {
+  display: flex;
+  border: 1px solid;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ulHeader {
+  display: flex;
+  /* justify-content: space-between; */  
+}
+
+.ulHeader > li {  
+  list-style: none;
+  margin-left: 10px;  
+}
+
+.headerLink {
+  color: black
 }
